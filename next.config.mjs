@@ -8,10 +8,6 @@ const __dirname = path.dirname(__filename)
 const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src')],
-    prependData: `
-      @use "@/shared/styles/variables/index" as *;
-      @use "@/shared/styles/_reset";
-    `,
   },
 }
 

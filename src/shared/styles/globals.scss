@@ -1,3 +1,6 @@
+@use './variables/index' as *;
+@forward './_reset';
+
 .container {
   width: 100%;
   display: flex;

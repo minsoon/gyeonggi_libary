@@ -12,7 +12,7 @@ const Header = () => {
         <a href='/statistics' style={{ marginRight: '1rem' }}>
           통계
         </a>
-        <a href='/login'>로그인</a>
+        <a href='/login'>로그아웃</a>
       </nav>
     </header>
   )
