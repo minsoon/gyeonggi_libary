@@ -1,5 +1,7 @@
+import Empty from '@/shared/ui/empty'
+
 const Statistics = () => {
-  return <div>Statistics</div>
+  return <Empty />
 }
 
 export default Statistics

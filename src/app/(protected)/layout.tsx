@@ -4,7 +4,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Header />
-      {children}
+      <div style={{ padding: '10px' }}> {children}</div>
     </>
   )
 }

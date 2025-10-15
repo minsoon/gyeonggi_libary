@@ -1,0 +1,117 @@
+@use '@/shared/styles/variables/index' as *;
+
+.detailsNotice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid $border-light;
+  background-color: $bg-surface-100;
+}
+
+.collapseButton {
+  &::before {
+    content: 'x';
+    margin-right: 5px;
+  }
+  border: 1px solid $border-light;
+  border-radius: 40px;
+  padding: 5px 10px;
+  background-color: $bg-surface-100;
+  color: $text-primary;
+  font-size: $font-body-primary;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  // gap: 20px;
+  border: 1px solid $border-light;
+  border-radius: 10px;
+  // padding: 10px;
+  background-color: $bg-surface-100;
+  margin-top: 20px;
+
+  .titleBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid $border-light;
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      p {
+        font-size: $font-h3;
+        font-weight: $font-weight-bold;
+        color: $text-primary;
+      }
+      span {
+        font-size: $font-body-primary;
+        font-weight: $font-weight-medium;
+        color: $text-primary;
+      }
+    }
+
+    .badgeBox {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
+
+  .floorInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+
+    img {
+      max-height: 300px;
+    }
+  }
+}
+
+.badge {
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: lightgrey;
+  font-size: $text-secondary;
+  font-weight: $font-weight-medium;
+
+  span {
+    margin-right: 10px;
+  }
+
+  &.realtime {
+    &::before {
+      content: 'x';
+      margin-right: 5px;
+    }
+    // background-color: $primary;
+  }
+  &.avg {
+    &::before {
+      content: 'a';
+      margin-right: 5px;
+    }
+    // background-color: $secondary-medium;
+  }
+  &.revisit {
+    &::before {
+      content: 'b';
+      margin-right: 5px;
+    }
+    // background-color: $secondary-light;
+  }
+}

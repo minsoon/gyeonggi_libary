@@ -1,0 +1,19 @@
+@use '@/shared/styles/variables/index' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  // background-color: white;
+  // color: #bac8d6;
+  border: 1px solid #e5e7eb;
+
+  .title {
+    font-size: $font-h3;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+  }
+}
