@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Cell, Pie, PieChart } from 'recharts'
+import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import Card from '@/shared/ui/card'
 import cardStyles from '@/shared/ui/card/card.module.scss'
 import styles from './summary.module.scss'
@@ -9,13 +9,14 @@ import styles from './summary.module.scss'
 const FloorDistribution = () => {
   const router = useRouter()
   const data = [
-    { name: 'B4~B2', value: 32, rate: 43, fill: '#6fd896' },
-    { name: 'B1', value: 28, rate: 13, fill: '#2f29a1' },
-    { name: '1F', value: 22, rate: -3, fill: '#ae368e' },
-    { name: '2F', value: 18, rate: 24, fill: '#b7a325' },
-    { name: '3F', value: 12, rate: -12, fill: '#d853fa' },
-    { name: '4F', value: 8, rate: 8, fill: '#2da8cd' },
-    { name: '5F', value: 4, rate: 14, fill: '#8884d8' },
+    { floorName: 'B4~B2', value: 32, rate: 43, fill: 'url(#grad1)' },
+    { floorName: 'B1', value: 28, rate: 13, fill: 'url(#grad2)' },
+    { floorName: '1F', value: 22, rate: -3, fill: 'url(#grad3)' },
+    { floorName: '2F', value: 18, rate: 24, fill: 'url(#grad4)' },
+    { floorName: '3F', value: 12, rate: -12, fill: 'url(#grad5)' },
+    { floorName: '4F', value: 8, rate: 8, fill: 'url(#grad6)' },
+    { floorName: '5F', value: 4, rate: 14, fill: 'url(#grad7)' },
+    { floorName: '기타', value: 5, rate: 0, fill: '#EBF4FF' }, // 빈 공간을 위한 기본값
   ]
 
   const handleClick = () => {
@@ -30,59 +31,80 @@ const FloorDistribution = () => {
           <img src='/icon/arrow-right.svg' width={24} height={24} alt='상세보기' />
         </button>
       </div>
-      <div className={styles.donutTable}>
-        <div className={styles.donutChart}>
-          <PieChart data={data} width={300} height={250}>
-            <Pie dataKey='value' data={data} innerRadius={60} outerRadius={100} />
-            <Cell fill='#8884d8' />
-            <Cell fill='#82ca9d' />
-          </PieChart>
+
+      <div className={styles.chartTableContainer}>
+        <div className={styles.responsiveContainer}>
+          <ResponsiveContainer width='100%' height='100%'>
+            <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+              <defs>
+                <linearGradient id='grad1' x1='8.12498' y1='8.12503' x2='186.875' y2='195'>
+                  <stop stop-color='#207DD4' />
+                  <stop offset='1' stop-color='#6FB9FF' />
+                </linearGradient>
+                <linearGradient id='grad2' x1='16.25' y1='-1.19847e-05' x2='195' y2='195'>
+                  <stop stop-color='#2AD44C' />
+                  <stop offset='1' stop-color='#89F09D' />
+                </linearGradient>
+                <linearGradient id='grad3' x1='0' y1='0' x2='195' y2='195'>
+                  <stop stop-color='#FFCE00' />
+                  <stop offset='1' stop-color='#FFE888' />
+                </linearGradient>
+                <linearGradient id='grad4' x1='0' y1='0' x2='195' y2='195'>
+                  <stop stop-color='#EE7C26' />
+                  <stop offset='1' stop-color='#FFAE71' />
+                </linearGradient>
+                <linearGradient id='grad5' x1='0' y1='0' x2='195' y2='195'>
+                  <stop stop-color='#D42A2A' />
+                  <stop offset='1' stop-color='#F56767' />
+                </linearGradient>
+                <linearGradient id='grad6' x1='0' y1='0' x2='195' y2='195'>
+                  <stop stop-color='#F42CCD' />
+                  <stop offset='1' stop-color='#FF71E3' />
+                </linearGradient>
+                <linearGradient id='grad7' x1='0' y1='0' x2='195' y2='195'>
+                  <stop stop-color='#883DD4' />
+                  <stop offset='1' stop-color='#C082FF' />
+                </linearGradient>
+              </defs>
+
+              <Pie dataKey='value' data={data} innerRadius={55} outerRadius={90} startAngle={90} endAngle={-360}>
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
         </div>
         <div className={styles.floorTable}>
           <table>
             <thead>
               <tr>
-                <th>층</th>
-                <th>현재 인원</th>
+                <th>
+                  <span>위치</span>
+                </th>
+                <th>현재인원</th>
                 <th>변화 비율</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>B4~B2</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
-              <tr>
-                <td>B1</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
-              <tr>
-                <td>1F</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
-              <tr>
-                <td>2F</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
-              <tr>
-                <td>3F</td>
-                <td>100명</td>
-                <td>-8%</td>
-              </tr>
-              <tr>
-                <td>4F</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
-              <tr>
-                <td>5F</td>
-                <td>100명</td>
-                <td>+10%</td>
-              </tr>
+              {data
+                .filter(item => item.floorName !== '기타')
+                .map(item => {
+                  return (
+                    <tr key={item.floorName}>
+                      <td>
+                        <div className={styles.floorItem}>
+                          <div className={styles.indicator} style={{ background: item.fill }}></div>
+                          <div className={styles.label}>{item.floorName}</div>
+                        </div>
+                      </td>
+                      <td className={styles.value}>{item.value}명</td>
+                      <td className={`${styles.rate} ${item.rate > 0 ? styles.increase : styles.decrease}`}>
+                        {item.rate}%
+                      </td>
+                    </tr>
+                  )
+                })}
             </tbody>
           </table>
         </div>

@@ -1,6 +1,5 @@
 import { Divider } from 'antd'
 import Calendar from '@/features/summary/ui/calendar'
-import FloorDistribution from '@/features/summary/ui/realtimeFloorDistribution'
 import RealtimeFloorDistribution from '@/features/summary/ui/realtimeFloorDistribution'
 import RealtimeVisitorInfo from '@/features/summary/ui/realtimeVisitorInfo'
 import StatisticsCard from '@/features/summary/ui/statisticsCard'
@@ -13,8 +12,10 @@ const SummaryWidget = () => {
     <section className={styles.dashboard}>
       <div className={styles.header}>
         <h2>방문 인원 & 혼잡도 종합현황</h2>
-        <Divider type='vertical' />
-        <p>도서관 방문자 현황을 10분 주기로 실시간 분석하여 업데이트 합니다.</p>
+        <div className={styles.headerContent}>
+          <Divider type='vertical' />
+          <p>도서관 방문자 현황을 10분 주기로 실시간 분석하여 업데이트 합니다.</p>
+        </div>
       </div>
 
       <div className={styles.dashboardGrid}>

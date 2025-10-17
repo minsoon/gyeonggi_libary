@@ -11,11 +11,6 @@ type Row = {
   congestionLastWeek?: number
 }
 
-const DATA: Row[] = [
-  { name: '방문인원', visitorThisWeek: 330, visitorLastWeek: 270 },
-  { name: '혼잡도', congestionThisWeek: 50, congestionLastWeek: 40 },
-]
-
 const COLORS = {
   lightBlue: '#CEE5FF',
   lightGreen: '#D7F4E2',
@@ -31,10 +26,15 @@ const COLORS = {
 }
 
 const DualAxisBarChart = () => {
+  const data = [
+    { name: '방문인원', visitorThisWeek: 330, visitorLastWeek: 270 },
+    { name: '혼잡도', congestionThisWeek: 50, congestionLastWeek: 40 },
+  ]
+
   return (
     <div className={styles.responsiveContainer}>
       <ResponsiveContainer width='100%' height='100%'>
-        <BarChart data={DATA} barGap={12} barCategoryGap='0%' margin={{ top: 10, right: 0, bottom: 0, left: 0 }}>
+        <BarChart data={data} barGap={12} barCategoryGap='0%' margin={{ top: 10, right: 0, bottom: 0, left: 0 }}>
           <defs>
             <linearGradient id='gradBlue' x1='0%' y1='0%' x2='0%' y2='100%'>
               <stop offset='-0.18%' stopColor={COLORS.blue} />
