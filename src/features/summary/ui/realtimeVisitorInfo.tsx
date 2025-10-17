@@ -7,7 +7,7 @@ const RealtimeVisitorInfo = () => {
   return (
     <Card className={styles.lineChartContainer}>
       <div>
-        <strong className={cardStyles.title}>실시간 방문인원 및 혼잡도</strong>
+        <span className={cardStyles.title}>실시간 방문인원 및 혼잡도</span>
         <span className={styles.updateStatus}>실시간 업데이트 중</span>
       </div>
       <VisitorLineChart />

@@ -1,11 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { Cell, Pie, PieChart } from 'recharts'
 import Card from '@/shared/ui/card'
 import cardStyles from '@/shared/ui/card/card.module.scss'
 import styles from './summary.module.scss'
 
 const FloorDistribution = () => {
+  const router = useRouter()
   const data = [
     { name: 'B4~B2', value: 32, rate: 43, fill: '#6fd896' },
     { name: 'B1', value: 28, rate: 13, fill: '#2f29a1' },
@@ -16,9 +18,18 @@ const FloorDistribution = () => {
     { name: '5F', value: 4, rate: 14, fill: '#8884d8' },
   ]
 
+  const handleClick = () => {
+    router.push('/statistics')
+  }
+
   return (
-    <Card className={styles.donutChartContainer}>
-      <strong className={cardStyles.title}>실시간 층별 체류 인원 분포</strong>
+    <Card className={`${styles.donutChartContainer} ${styles.detail}`}>
+      <div>
+        <span className={cardStyles.title}>실시간 층별 체류 인원 분포</span>
+        <button className={styles.detailButton} onClick={handleClick}>
+          <img src='/icon/arrow-right.svg' width={24} height={24} alt='상세보기' />
+        </button>
+      </div>
       <div className={styles.donutTable}>
         <div className={styles.donutChart}>
           <PieChart data={data} width={300} height={250}>

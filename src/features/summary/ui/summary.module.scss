@@ -1,34 +1,36 @@
 @use '@/shared/styles/variables/index' as *;
 
-// 대시보드 전체 레이아웃
 .dashboard {
-  padding: 2rem;
-  background-color: #f8f9fa;
   min-height: 100vh;
-}
 
-.header {
-  margin-bottom: 2rem;
+  .header {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    padding: 8px 0 4px 0;
 
-  h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-  }
+    h2 {
+      color: #255580;
+      letter-spacing: -0.6px;
+      line-height: 33.6px;
+    }
 
-  p {
-    color: #6c757d;
-    font-size: 1.1rem;
+    p {
+      color: #6c757d;
+      font-size: 16px;
+      font-weight: $font-weight-medium;
+      line-height: 22.4px;
+      letter-spacing: -0.4px;
+    }
   }
 }
 
 // CSS Grid 레이아웃
 .dashboardGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr;
-  grid-template-rows: 200px 200px auto auto;
-  gap: 1.5rem;
+  grid-template-columns: 277px 441px auto 273px;
+  grid-template-rows: 193px 193px auto auto;
+  gap: 16px;
   grid-template-areas:
     'realtime-visitors chart-bar chart-donut weather'
     'today-visitors chart-bar chart-donut weather'
@@ -37,17 +39,61 @@
     'calendar calendar calendar calendar';
 }
 
-// 통계 카드 스타일
+// 통계 위젯
+.statValue {
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+  color: $text-secondary;
+}
+
+.statHeader {
+  font-size: 18px;
+  font-weight: $font-weight-bold;
+  margin-top: 8px;
+  color: $text-light-gray;
+}
+
+.statChange {
+  background-color: white;
+  color: $text-secondary;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  padding: 4px 16px 4px 12px;
+  background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
+
+  &.increase {
+    color: $state-increase;
+  }
+  &.decrease {
+    color: $state-decrease;
+  }
+}
+
 .realtimeVisitors {
   grid-area: realtime-visitors;
-  background-color: #3b82f6;
+  background: linear-gradient(114deg, #48beff 0%, rgba(161, 221, 255, 0.87) 100%);
   color: white;
+
+  .statValue {
+    color: $text-white;
+  }
+  .statHeader {
+    color: $text-blue;
+  }
 }
 
 .todayVisitors {
   grid-area: today-visitors;
-  background-color: #10b981;
+  background: linear-gradient(115deg, #abd600 0%, #f1ffb8 101.18%);
   color: white;
+
+  .statValue {
+    color: $text-white;
+  }
+  .statHeader {
+    color: #5a7840;
+  }
 }
 
 .returnVisitors {
@@ -58,37 +104,95 @@
   grid-area: avg-stay-time;
 }
 
-.statValue {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.statHeader {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.statChange {
-  background-color: white;
-  color: #2c3e50;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 0.5rem;
-}
-
-// 막대 차트 영역 (2행 차지)
+// 막대 차트 위젯
 .barChartContainer {
   grid-area: chart-bar;
+  display: flex;
+  flex-direction: column;
+
+  .legendContent {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr auto;
+    gap: 8px 0;
+    width: 100%;
+    font-size: 14px;
+    line-height: 100%;
+    font-weight: $font-weight-bold;
+    color: $text-secondary;
+
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legendIndicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 1px;
+      transform: rotate(-90deg);
+
+      &.blue {
+        background: linear-gradient(270deg, #065bac -0.18%, #227ed7 99.82%);
+      }
+
+      &.lightBlue {
+        background: #cee5ff;
+      }
+
+      &.green {
+        background: linear-gradient(270deg, #00ae6b -0.4%, #25d08e 99.6%);
+      }
+
+      &.lightGreen {
+        background: #d7f4e2;
+      }
+    }
+
+    .suffixLabel {
+      color: $text-light-gray;
+
+      &:nth-child(5) {
+        grid-row: 1;
+        grid-column: 3;
+      }
+
+      &:nth-child(6) {
+        grid-row: 2;
+        grid-column: 3;
+      }
+    }
+  }
+
+  .responsiveContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 
-// 도넛 차트 영역 (2행 차지)
+// 도넛 차트 위젯
 .donutChartContainer {
   grid-area: chart-donut;
 }
 
-// 꺾은선 그래프 (2행, 2열 차지)
+.detail {
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .detailButton {
+      padding: 0;
+      border: none;
+      background: none;
+      display: inherit;
+      align-items: inherit;
+    }
+  }
+}
+
+// 라인 차트 위젯
 .lineChartContainer {
   grid-area: chart-line;
   display: flex;
@@ -109,8 +213,7 @@
 .donutTable {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 24px;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -128,6 +231,7 @@
   .recharts-wrapper {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 100% !important;
   }
 
   .recharts-surface {

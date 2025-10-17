@@ -2,9 +2,9 @@ import Header from '@/shared/ui/header'
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className='container'>
       <Header />
-      <div style={{ padding: '10px' }}> {children}</div>
-    </>
+      <div> {children}</div>
+    </div>
   )
 }

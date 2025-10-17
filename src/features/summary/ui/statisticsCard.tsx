@@ -15,7 +15,10 @@ const StatisticsCard = ({ title, value, change, className }: StatisticsCardProps
         <strong className={styles.statValue}>{value}</strong>
         <div className={styles.statHeader}>{title}</div>
       </div>
-      <div className={styles.statChange}>{change}</div>
+      <div className={`${styles.statChange}`}>
+        {/* <img src='/icon/arrow-increase.svg' width={16} height={16} alt='상세보기' /> */}
+        <span>{change}</span>
+      </div>
     </Card>
   )
 }

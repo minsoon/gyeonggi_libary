@@ -16,11 +16,12 @@ body {
   font-size: $font-body-strong;
   font-weight: $font-weight-medium;
   line-height: $line-height-sm;
+  background: linear-gradient(108deg, #ffffff 0%, #eaf3ff 100%);
   color: $text-primary;
-  background-color: $bg-surface-100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+  margin: 0;
 }
 
 h1,
