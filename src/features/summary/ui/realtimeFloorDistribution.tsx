@@ -38,32 +38,32 @@ const FloorDistribution = () => {
             <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
               <defs>
                 <linearGradient id='grad1' x1='8.12498' y1='8.12503' x2='186.875' y2='195'>
-                  <stop stop-color='#207DD4' />
-                  <stop offset='1' stop-color='#6FB9FF' />
+                  <stop stopColor='#207DD4' />
+                  <stop offset='1' stopColor='#6FB9FF' />
                 </linearGradient>
                 <linearGradient id='grad2' x1='16.25' y1='-1.19847e-05' x2='195' y2='195'>
-                  <stop stop-color='#2AD44C' />
-                  <stop offset='1' stop-color='#89F09D' />
+                  <stop stopColor='#2AD44C' />
+                  <stop offset='1' stopColor='#89F09D' />
                 </linearGradient>
                 <linearGradient id='grad3' x1='0' y1='0' x2='195' y2='195'>
-                  <stop stop-color='#FFCE00' />
-                  <stop offset='1' stop-color='#FFE888' />
+                  <stop stopColor='#FFCE00' />
+                  <stop offset='1' stopColor='#FFE888' />
                 </linearGradient>
                 <linearGradient id='grad4' x1='0' y1='0' x2='195' y2='195'>
-                  <stop stop-color='#EE7C26' />
-                  <stop offset='1' stop-color='#FFAE71' />
+                  <stop stopColor='#EE7C26' />
+                  <stop offset='1' stopColor='#FFAE71' />
                 </linearGradient>
                 <linearGradient id='grad5' x1='0' y1='0' x2='195' y2='195'>
-                  <stop stop-color='#D42A2A' />
-                  <stop offset='1' stop-color='#F56767' />
+                  <stop stopColor='#D42A2A' />
+                  <stop offset='1' stopColor='#F56767' />
                 </linearGradient>
                 <linearGradient id='grad6' x1='0' y1='0' x2='195' y2='195'>
-                  <stop stop-color='#F42CCD' />
-                  <stop offset='1' stop-color='#FF71E3' />
+                  <stop stopColor='#F42CCD' />
+                  <stop offset='1' stopColor='#FF71E3' />
                 </linearGradient>
                 <linearGradient id='grad7' x1='0' y1='0' x2='195' y2='195'>
-                  <stop stop-color='#883DD4' />
-                  <stop offset='1' stop-color='#C082FF' />
+                  <stop stopColor='#883DD4' />
+                  <stop offset='1' stopColor='#C082FF' />
                 </linearGradient>
               </defs>
 

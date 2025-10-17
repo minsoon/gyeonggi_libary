@@ -36,7 +36,7 @@
 .dashboardGrid {
   display: grid;
   grid-template-columns: 277px 441px auto 273px;
-  grid-template-rows: 193px 193px auto auto;
+  grid-template-rows: 193px 193px 193px 193px;
   gap: 16px;
   grid-template-areas:
     'realtime-visitors chart-bar chart-donut weather'
@@ -45,63 +45,130 @@
     'avg-stay-time chart-line chart-line chart-line'
     'calendar calendar calendar calendar';
 }
-
 // 통계 위젯
-.statValue {
-  font-size: 28px;
-  font-weight: $font-weight-bold;
-  color: $text-secondary;
-}
 
-.statHeader {
-  font-size: 18px;
-  font-weight: $font-weight-bold;
-  margin-top: 8px;
-  color: $text-light-gray;
-}
+.statContainer {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  position: relative;
 
-.statChange {
-  background-color: white;
-  color: $text-secondary;
-  font-size: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 100px;
-  padding: 4px 16px 4px 12px;
-  background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
-}
-
-.realtimeVisitors {
-  grid-area: realtime-visitors;
-  background: linear-gradient(114deg, #48beff 0%, rgba(161, 221, 255, 0.87) 100%);
-  color: white;
+  .widgetIcon {
+    top: 24px;
+    position: absolute;
+    right: 24px;
+  }
 
   .statValue {
-    color: $text-white;
+    font-size: 28px;
+    font-weight: $font-weight-bold;
+    color: $text-secondary;
   }
+
   .statHeader {
-    color: $text-blue;
+    font-size: 18px;
+    font-weight: $font-weight-bold;
+    margin-top: 8px;
+    color: $text-light-gray;
   }
-}
 
-.todayVisitors {
-  grid-area: today-visitors;
-  background: linear-gradient(115deg, #abd600 0%, #f1ffb8 101.18%);
-  color: white;
+  .statChangeContainer {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    font-family: 'NanumSquare';
 
-  .statValue {
-    color: $text-white;
+    .changeContent {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 16px 4px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 100px;
+      background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
+      font-size: 12px;
+
+      .changeInfo {
+        display: flex;
+        align-items: center;
+      }
+
+      .changeLabel {
+        font-family: 'Roboto';
+        font-weight: 500;
+      }
+
+      &.default {
+        color: $text-secondary;
+        border: 1px solid $border-light;
+        background: rgba(209, 209, 209, 0.1);
+      }
+
+      &.increase {
+        color: $state-increase;
+        border: 1px solid #ffc9c9;
+        background: rgba(255, 201, 201, 0.1);
+      }
+      &.decrease {
+        color: $state-decrease;
+        border: 1px solid #7fbbff;
+        background: rgba(127, 187, 255, 0.1);
+      }
+    }
   }
-  .statHeader {
-    color: #5a7840;
+
+  &.realtimeVisitors {
+    grid-area: realtime-visitors;
+    background: linear-gradient(114deg, #48beff 0%, rgba(161, 221, 255, 0.87) 100%);
+    color: white;
+
+    .statValue {
+      color: $text-white;
+    }
+    .statHeader {
+      color: $text-blue;
+    }
+
+    .changeContent {
+      &.increase,
+      &.decrease {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
+      }
+    }
   }
-}
 
-.returnVisitors {
-  grid-area: return-visitors;
-}
+  &.todayVisitors {
+    grid-area: today-visitors;
+    background: linear-gradient(115deg, #abd600 0%, #f1ffb8 101.18%);
+    color: white;
 
-.avgStayTime {
-  grid-area: avg-stay-time;
+    .statValue {
+      color: $text-white;
+    }
+    .statHeader {
+      color: #5a7840;
+    }
+
+    .changeContent {
+      &.increase,
+      &.decrease {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
+      }
+    }
+  }
+
+  &.returnVisitors {
+    grid-area: return-visitors;
+  }
+
+  &.avgStayTime {
+    grid-area: avg-stay-time;
+  }
 }
 
 // 막대 차트 위젯

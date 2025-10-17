@@ -19,20 +19,10 @@ const SummaryWidget = () => {
       </div>
 
       <div className={styles.dashboardGrid}>
-        <StatisticsCard
-          title='실시간 체류 인원'
-          value='187명'
-          change='121명 전일 대비'
-          className={styles.realtimeVisitors}
-        />
-        <StatisticsCard
-          title='오늘 누적 방문 인원'
-          value='234명'
-          change='30명 전일 대비'
-          className={styles.todayVisitors}
-        />
-        <StatisticsCard title='재방문 인원' value='76명' change='▲ 12명 전일 대비' className={styles.returnVisitors} />
-        <StatisticsCard title='평균 체류 시간' value='112분' change='▲ 12분 전일 대비' className={styles.avgStayTime} />
+        <StatisticsCard title='실시간 체류 인원' titleValue={181} compareValue={-10} type='realtimeVisitors' />
+        <StatisticsCard title='오늘 누적 방문 인원' titleValue={234} compareValue={30} type='todayVisitors' />
+        <StatisticsCard title='재방문 인원' titleValue={76} compareValue={0} type='returnVisitors' />
+        <StatisticsCard title='평균 체류 시간' titleValue={112} compareValue={-12} type='avgStayTime' />
         <VisitorBarChart />
         <RealtimeFloorDistribution />
         <Weather />
