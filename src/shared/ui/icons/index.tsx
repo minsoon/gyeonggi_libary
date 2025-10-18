@@ -87,4 +87,41 @@ const LogoutIcon = () => {
   )
 }
 
-export { DetailsIcon, StatisticsIcon, SummaryIcon, SettingIcon, BellIcon, LogoutIcon }
+const ArrowDoubleUpIcon = ({ color }: { color?: string }) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'>
+      <path
+        d='M15.8332 9.16658L9.99984 3.33325L4.1665 9.16658M15.8332 15.8333L9.99984 9.99992L4.1665 15.8333'
+        stroke={color || '#28395D'}
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  )
+}
+
+const ArrowDoubleDownIcon = ({ color }: { color?: string }) => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'>
+      <path
+        d='M15.8334 10.8333L10.0001 16.6666L4.16675 10.8333M15.8334 4.16663L10.0001 9.99996L4.16675 4.16663'
+        stroke={color || '#28395D'}
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  )
+}
+
+export {
+  DetailsIcon,
+  StatisticsIcon,
+  SummaryIcon,
+  SettingIcon,
+  BellIcon,
+  LogoutIcon,
+  ArrowDoubleUpIcon,
+  ArrowDoubleDownIcon,
+}

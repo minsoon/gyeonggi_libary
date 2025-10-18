@@ -4,114 +4,152 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between; // center → space-between으로 변경
+  justify-content: center;
   gap: 20px;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid $border-light;
-  background-color: $bg-surface-100;
+  border: 1px solid #c9daff;
+  background-color: #ebf4ff;
+  color: #255580;
+  line-height: 140%;
+  font-size: 18px;
+  padding: 4px;
+  margin: 16px 0;
+
+  p {
+    padding: 16px 0;
+  }
+
+  button {
+    border-radius: 100px;
+    font-size: $font-button-large;
+    font-weight: $font-weight-medium;
+    line-height: 100%;
+    border: none;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &.allOpenButton {
+      border: 1px solid #2b90ef;
+      background: linear-gradient(95deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+      color: #0068cc;
+    }
+
+    &.allCloseButton {
+      background: linear-gradient(95deg, #2b90ef 0.37%, #0068cc 100.37%);
+      color: $text-white;
+      border: none;
+    }
+  }
+}
+
+.allFloorContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  flex: 1; // 남은 공간을 모두 차지
+  min-height: 0; // flexbox에서 스크롤을 위해 필요
+  overflow-y: auto;
+  // max-height 제거하여 flex: 1이 제대로 작동하도록
+  position: relative;
+
+  .floorContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dae7f6;
+    background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+    box-shadow: 0 0 10px 0 rgba(134, 178, 235, 0.25);
+
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .titleBox {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr; // 좌측, 중앙, 우측 영역
+      align-items: center;
+      padding: 28px 24px;
+      color: $text-dark-gray;
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        grid-column: 1; // 첫 번째 그리드 영역 (좌측)
+
+        p {
+          font-size: 23px;
+          font-weight: $font-weight-bold;
+        }
+        span {
+          font-size: 18px;
+          font-weight: $font-weight-medium;
+        }
+      }
+
+      .badgeBox {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        grid-column: 2; // 두 번째 그리드 영역 (중앙)
+        justify-self: center; // 중앙 정렬
+
+        .badge {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px 16px;
+          border-radius: 100px;
+          background-color: #ebf4ff;
+          font-size: $font-body-primary;
+
+          .badgeTitle {
+            margin-left: 8px;
+            margin-right: 12px;
+            color: #5a6e7b;
+            font-weight: $font-weight-semibold;
+          }
+
+          .badgeValue {
+            color: #28395d;
+            font-weight: $font-weight-extrabold;
+          }
+        }
+      }
+    }
+
+    .floorInfo {
+      display: flex;
+      flex-direction: row;
+      padding: 24px;
+      width: 100%;
+
+      img {
+        margin: 0 48px;
+        width: 100%;
+        height: 100%;
+        max-width: 487px;
+        max-height: 317px;
+      }
+    }
+  }
 }
 
 .collapseButton {
-  &::before {
-    content: 'x';
-    margin-right: 5px;
-  }
-  border: 1px solid $border-light;
-  border-radius: 40px;
+  border: none;
+  background: none;
   padding: 5px 10px;
-  background-color: $bg-surface-100;
-  color: $text-primary;
-  font-size: $font-body-primary;
-  font-weight: $font-weight-medium;
-  cursor: pointer;
-}
-
-.detailsContainer {
-  display: flex;
-  flex-direction: column;
-  // gap: 20px;
-  border: 1px solid $border-light;
-  border-radius: 10px;
-  // padding: 10px;
-  background-color: $bg-surface-100;
-  margin-top: 20px;
-
-  .titleBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px;
-    border-bottom: 1px solid $border-light;
-
-    .title {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-
-      p {
-        font-size: $font-h3;
-        font-weight: $font-weight-bold;
-        color: $text-primary;
-      }
-      span {
-        font-size: $font-body-primary;
-        font-weight: $font-weight-medium;
-        color: $text-primary;
-      }
-    }
-
-    .badgeBox {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-    }
-  }
-
-  .floorInfo {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    padding: 20px;
-
-    img {
-      max-height: 300px;
-    }
-  }
-}
-
-.badge {
-  padding: 8px 15px;
-  border-radius: 20px;
-  background-color: lightgrey;
-  font-size: $text-secondary;
-  font-weight: $font-weight-medium;
-
-  span {
-    margin-right: 10px;
-  }
-
-  &.realtime {
-    &::before {
-      content: 'x';
-      margin-right: 5px;
-    }
-    // background-color: $primary;
-  }
-  &.avg {
-    &::before {
-      content: 'a';
-      margin-right: 5px;
-    }
-    // background-color: $secondary-medium;
-  }
-  &.revisit {
-    &::before {
-      content: 'b';
-      margin-right: 5px;
-    }
-    // background-color: $secondary-light;
-  }
+  grid-column: 3; // 세 번째 그리드 영역 (우측)
+  justify-self: end; // 우측 정렬
 }
