@@ -32,7 +32,6 @@
   }
 }
 
-// CSS Grid 레이아웃
 .dashboardGrid {
   display: grid;
   grid-template-columns: 277px 441px auto 273px;
@@ -184,7 +183,7 @@
   grid-area: chart-bar;
   display: flex;
   flex-direction: column;
-
+  background: linear-gradient(143deg, #fff 52.33%, rgba(255, 255, 255, 0) 99%);
   .legendContent {
     display: grid;
     grid-template-columns: 1.5fr 1.5fr auto;
@@ -274,6 +273,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+
     &:hover {
       cursor: pointer;
     }
@@ -293,38 +293,40 @@
   }
 }
 
-// 도넛차트 위젯
-
 // 도넛 차트 위젯
 .donutChartContainer {
   grid-area: chart-donut;
+  background: linear-gradient(143deg, #fff 52.33%, rgba(255, 255, 255, 0) 99%);
 
   .chartTableContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 24px;
-    flex: 1 0 0;
-    align-self: stretch;
+    height: 100%;
 
     .responsiveContainer {
-      position: relative;
-      max-width: 250px;
-      max-height: 250px;
-      padding: 16px;
+      max-width: 195px;
+      max-height: 195px;
       width: 100%;
       height: 100%;
     }
 
     .floorTable {
       width: 100%;
-      max-width: 100%;
-      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
       table {
         width: 100%;
-        border-collapse: collapse;
+        height: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        box-shadow: 0 4px 4px 0 rgba(134, 178, 235, 0.16);
+        border-radius: 10px;
         table-layout: fixed;
-        max-width: 100%;
+        overflow: hidden;
 
         th,
         td {
@@ -332,60 +334,60 @@
           font-size: 14px;
           line-height: 100%;
           font-weight: $font-weight-bold;
-          padding: 10px;
         }
 
         th {
-          border-radius: 10px 10px 0 0;
           background: #ebf4ff;
-
           color: $text-blue;
-          height: 35.5px;
+          padding: 12px 0;
+          height: auto;
         }
 
-        td {
+        tr {
+          line-height: 100%;
           color: $text-navy;
-          height: 38.5px;
 
-          .floorItem {
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
-            display: inline-flex;
+          &:nth-child(odd) {
+            background: #fff;
+          }
 
-            .indicator {
-              width: 8px;
-              height: 8px;
-              border-radius: 1px;
-            }
+          &:nth-child(even) {
+            background: #f7fbff;
+          }
 
-            .label {
-              justify-content: flex-end;
+          td {
+            color: $text-navy;
+            padding: 6px 0;
+            vertical-align: middle;
+
+            .floorItem {
+              justify-content: center;
               align-items: center;
-              gap: 8px;
+              gap: 4px;
+              display: inline-flex;
+
+              .label {
+                font-weight: $font-weight-extrabold;
+              }
+            }
+
+            &.value {
+              font-weight: $font-weight-light;
+            }
+
+            &.rate {
+              font-weight: $font-weight-semibold;
               display: flex;
-              color: $text-navy;
-              font-size: 14px;
-              font-weight: $font-weight-extrabold;
-              line-height: 100%;
-            }
-          }
+              align-items: center;
+              justify-content: center;
+              height: 100%;
 
-          &.value {
-            font-weight: $font-weight-bold;
-          }
-
-          &.rate {
-            // color: blue;
-            font-weight: $font-weight-semibold;
-
-            &.increase {
-              color: $state-increase;
-            }
-            &.decrease {
-              color: $state-decrease;
+              &.increase {
+                color: $state-increase;
+              }
+              &.decrease {
+                color: $state-decrease;
+              }
             }
           }
         }
@@ -486,40 +488,5 @@
       display: inherit;
       align-items: inherit;
     }
-  }
-}
-
-// 반응형 디자인
-@media (max-width: 1200px) {
-  .dashboardGrid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
-    grid-template-areas:
-      'realtime-visitors chart-bar'
-      'today-visitors chart-donut'
-      'return-visitors weather-widget'
-      'avg-stay-time chart-line'
-      'calendar-widget calendar-widget';
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboardGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      'realtime-visitors'
-      'today-visitors'
-      'return-visitors'
-      'avg-stay-time'
-      'chart-bar'
-      'chart-donut'
-      'weather-widget'
-      'chart-line'
-      'calendar-widget';
-  }
-
-  .donutTable {
-    grid-template-columns: 1fr;
   }
 }
