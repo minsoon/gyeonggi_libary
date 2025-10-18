@@ -6,6 +6,14 @@ const __dirname = path.dirname(__filename)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/toysmth/:path*',
+        destination: 'http://toysmth-api.toysmthiot.com:8085/:path*',
+      },
+    ]
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src')],
   },
