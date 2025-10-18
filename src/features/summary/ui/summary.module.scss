@@ -75,11 +75,10 @@
       border: 1px solid #9eaed0;
       border-radius: 4px;
       padding: 2px 4px;
-      font-size: 14px;
+      font-size: $font-body-secondary;
       font-weight: $font-weight-semibold;
       color: #9eaed0;
       margin-left: 8px;
-      line-height: normal;
     }
   }
 
@@ -99,7 +98,7 @@
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 100px;
       background: linear-gradient(94deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100.43%);
-      font-size: 12px;
+      font-size: $font-label;
 
       .changeInfo {
         display: flex;
@@ -107,7 +106,6 @@
       }
 
       .changeLabel {
-        font-family: 'Roboto';
         font-weight: $font-weight-medium;
       }
 
@@ -248,11 +246,6 @@
   }
 }
 
-// 도넛 차트 위젯
-.donutChartContainer {
-  grid-area: chart-donut;
-}
-
 .detail {
   > div {
     display: flex;
@@ -274,106 +267,123 @@
   grid-area: chart-line;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 24px;
+  background: linear-gradient(93deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);
 
-  .updateStatus {
-    &::before {
-      content: 'x ';
-    }
-    font-size: 0.9rem;
-    color: #6c757d;
-    margin-left: 1rem;
+  .titleContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .realtimeBadge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    font-size: $font-body-primary;
+    font-weight: $font-weight-medium;
+    color: $text-blue;
+    background-color: #ebf4ff;
+    border-radius: 100px;
+    height: 32px;
   }
 }
 
 // 도넛차트 위젯
-.chartTableContainer {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  flex: 1 0 0;
-  align-self: stretch;
 
-  .responsiveContainer {
-    position: relative;
-    max-width: 250px;
-    max-height: 250px;
-    padding: 16px;
-    width: 100%;
-    height: 100%;
-  }
+// 도넛 차트 위젯
+.donutChartContainer {
+  grid-area: chart-donut;
 
-  .floorTable {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
+  .chartTableContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1 0 0;
+    align-self: stretch;
 
-    table {
+    .responsiveContainer {
+      position: relative;
+      max-width: 250px;
+      max-height: 250px;
+      padding: 16px;
       width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
+      height: 100%;
+    }
+
+    .floorTable {
+      width: 100%;
       max-width: 100%;
+      overflow: hidden;
 
-      th,
-      td {
-        text-align: center;
-        font-size: 14px;
-        line-height: 100%;
-        font-weight: $font-weight-bold;
-        padding: 10px;
-      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        max-width: 100%;
 
-      th {
-        border-radius: 10px 10px 0 0;
-        background: #ebf4ff;
-
-        color: $text-blue;
-        height: 35.5px;
-      }
-
-      td {
-        color: $text-navy;
-        height: 38.5px;
-
-        .floorItem {
-          width: 100%;
-          height: 100%;
-          justify-content: center;
-          align-items: center;
-          gap: 4px;
-          display: inline-flex;
-
-          .indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 1px;
-          }
-
-          .label {
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            display: flex;
-            color: $text-navy;
-            font-size: 14px;
-            font-weight: $font-weight-extrabold;
-            line-height: 100%;
-          }
-        }
-
-        &.value {
+        th,
+        td {
+          text-align: center;
+          font-size: 14px;
+          line-height: 100%;
           font-weight: $font-weight-bold;
+          padding: 10px;
         }
 
-        &.rate {
-          // color: blue;
-          font-weight: $font-weight-semibold;
+        th {
+          border-radius: 10px 10px 0 0;
+          background: #ebf4ff;
 
-          &.increase {
-            color: $state-increase;
+          color: $text-blue;
+          height: 35.5px;
+        }
+
+        td {
+          color: $text-navy;
+          height: 38.5px;
+
+          .floorItem {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            display: inline-flex;
+
+            .indicator {
+              width: 8px;
+              height: 8px;
+              border-radius: 1px;
+            }
+
+            .label {
+              justify-content: flex-end;
+              align-items: center;
+              gap: 8px;
+              display: flex;
+              color: $text-navy;
+              font-size: 14px;
+              font-weight: $font-weight-extrabold;
+              line-height: 100%;
+            }
           }
-          &.decrease {
-            color: $state-decrease;
+
+          &.value {
+            font-weight: $font-weight-bold;
+          }
+
+          &.rate {
+            // color: blue;
+            font-weight: $font-weight-semibold;
+
+            &.increase {
+              color: $state-increase;
+            }
+            &.decrease {
+              color: $state-decrease;
+            }
           }
         }
       }
@@ -447,7 +457,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size: 12px;
+        font-size: $font-label;
         line-height: 20px;
         text-align: center;
       }
@@ -458,6 +468,22 @@
 // 이벤트 캘린더
 .calendarContainer {
   grid-area: calendar;
+
+  .titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+
+    button {
+      padding: 0;
+      border: none;
+      background: none;
+      display: inherit;
+      align-items: inherit;
+    }
+  }
 }
 
 // 반응형 디자인

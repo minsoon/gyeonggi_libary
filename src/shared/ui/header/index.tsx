@@ -1,5 +1,14 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { BellIcon, DetailsIcon, LogoutIcon, SettingIcon, StatisticsIcon, SummaryIcon } from '../icons'
+
+interface NavLinkProps {
+  href: string
+  icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactNode
+  label?: string
+}
 
 const Header = () => {
   return (
@@ -11,30 +20,15 @@ const Header = () => {
 
       <nav>
         <div className='nav-group main-nav'>
-          <Link href='/summary' className='nav-link'>
-            <SummaryIcon />
-            <span>종합현황</span>
-          </Link>
-          <Link href='/details' className='nav-link'>
-            <DetailsIcon />
-            <span>상세현황</span>
-          </Link>
-          <Link href='/statistics' className='nav-link'>
-            <StatisticsIcon />
-            <span>통계</span>
-          </Link>
+          {navigationConfig.main.map(({ href, icon, label }) => (
+            <NavLink key={href} href={href} icon={icon} label={label} />
+          ))}
         </div>
 
         <div className='nav-group user-nav'>
-          <Link href='/login' className='nav-link'>
-            <SettingIcon />
-          </Link>
-          <Link href='/login' className='nav-link'>
-            <BellIcon />
-          </Link>
-          <Link href='/login' className='nav-link'>
-            <LogoutIcon />
-          </Link>
+          {navigationConfig.user.map(({ href, icon }) => (
+            <NavLink key={href} href={href} icon={icon} />
+          ))}
         </div>
       </nav>
     </header>
@@ -42,3 +36,27 @@ const Header = () => {
 }
 
 export default Header
+
+const NavLink = ({ href, icon: Icon, label }: NavLinkProps) => {
+  const pathname = usePathname()
+  const isActive = pathname === href
+
+  return (
+    <Link href={href} className={`nav-link ${isActive ? 'active' : ''}`}>
+      <Icon />
+      {label && <span>{label}</span>}
+    </Link>
+  )
+}
+const navigationConfig = {
+  main: [
+    { href: '/summary', icon: SummaryIcon, label: '종합현황' },
+    { href: '/details', icon: DetailsIcon, label: '상세현황' },
+    { href: '/statistics', icon: StatisticsIcon, label: '통계' },
+  ],
+  user: [
+    { href: '/settings', icon: SettingIcon },
+    { href: '/alerts', icon: BellIcon },
+    { href: '/login', icon: LogoutIcon },
+  ],
+}

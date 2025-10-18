@@ -72,10 +72,36 @@ header {
         font-weight: $font-weight-medium;
         transition: all 0.2s ease;
 
+        .nav-icon {
+          transition: all 0.2s ease;
+        }
+
         &:hover {
+          color: $text-blue;
+
+          .nav-icon {
+            stroke: $text-blue;
+            filter: drop-shadow(0px 0px 4px rgba(6, 91, 172, 0.25));
+          }
+        }
+
+        &.active {
           color: $text-blue;
           background-color: #ebf4ff;
           border-radius: 99px;
+          font-weight: $font-weight-medium;
+
+          .nav-icon {
+            stroke: $text-blue;
+          }
+        }
+
+        // CSS-only active state (hydration error 방지)
+        &:target {
+          color: $text-blue;
+          background-color: #ebf4ff;
+          border-radius: 99px;
+          font-weight: $font-weight-medium;
 
           .nav-icon {
             stroke: $text-blue;
