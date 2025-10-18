@@ -26,7 +26,7 @@ const DetailsWidget = () => {
       <div className={styles.allFloorContainer}>
         {Object.values(FLOOR_INFO).map(floor => (
           <StatisticsFloor
-            key={floor.name}
+            key={floor.floorNumber}
             isOpen={isAllOpen}
             realTimeVisitors={123}
             avgStayTime={63}

@@ -8,7 +8,8 @@ import styles from './details.module.scss'
 
 interface StatisticsFloorProps {
   isOpen: boolean
-  name: string
+  floorNumber: string
+  floorName: string
   description: string
   src: string
   realTimeVisitors: number
@@ -18,7 +19,8 @@ interface StatisticsFloorProps {
 
 const StatisticsFloor = ({
   isOpen,
-  name,
+  floorNumber,
+  floorName,
   description,
   src,
   realTimeVisitors,
@@ -36,10 +38,10 @@ const StatisticsFloor = ({
   }, [isOpen])
 
   return (
-    <div className={styles.floorContainer} onClick={handleClick}>
+    <div className={`${styles.floorContainer} ${isOpenContent ? styles.open : ''}`} onClick={handleClick}>
       <div className={styles.titleBox}>
         <div className={styles.title}>
-          <p>{name}</p>
+          <p>{floorName}</p>
           <span>{description}</span>
         </div>
 
@@ -56,8 +58,14 @@ const StatisticsFloor = ({
 
       {isOpenContent && (
         <div className={styles.floorInfo}>
-          <img src={src} alt={`${name} 이미지`} />
-          <VisitorLineChart />
+          <img className={styles.floorImage} src={src} alt={`${floorName} 이미지`} />
+          <div className={styles.lineChartContainer}>
+            <div className={styles.floorNumber}>
+              <span>{floorNumber}</span>
+              <img src='/icon/arrow-single-right.svg' alt='arrow-right' width={14} height={14} />
+            </div>
+            <VisitorLineChart />
+          </div>
         </div>
       )}
     </div>
