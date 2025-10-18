@@ -1,29 +1,33 @@
 import styles from './details.module.scss'
 
-interface BadgeProps {
-  children: string
-  className?: string
-  type: 'realtime' | 'avg' | 'revisit'
-}
-
-const Badge = ({ children, type }: BadgeProps) => {
-  const badgeTitle = (type: 'realtime' | 'avg' | 'revisit') => {
-    switch (type) {
-      case 'realtime':
-        return '실시간 체류 인원'
-      case 'avg':
-        return '평균 체류 시간'
-      case 'revisit':
-        return '재방문 인원'
-    }
-  }
-
+const RealTimeBadge = ({ value }: { value: number }) => {
   return (
-    <div className={`${styles.badge} ${styles[type]}`}>
-      <span>{badgeTitle(type)}</span>
-      <strong>{children}</strong>
+    <div className={`${styles.badge}`}>
+      <img src='/icon/badge-realtime.svg' alt='실시간 체류 인원' width={22.5} height={18} />
+      <span className={styles.badgeTitle}>실시간 체류 인원</span>
+      <span className={styles.badgeValue}>{value}명</span>
     </div>
   )
 }
 
-export default Badge
+const AvgStaytimeBadge = ({ value }: { value: number }) => {
+  return (
+    <div className={`${styles.badge}`}>
+      <img src='/icon/badge-avgStayTime.svg' alt='평균 체류 시간' width={22.5} height={18} />
+      <span className={styles.badgeTitle}>평균 체류 시간</span>
+      <span className={styles.badgeValue}>{value}분</span>
+    </div>
+  )
+}
+
+const RevisitBadge = ({ value }: { value: number }) => {
+  return (
+    <div className={`${styles.badge}`}>
+      <img src='/icon/badge-revisit.svg' alt='재방문 인원' width={22.5} height={18} />
+      <span className={styles.badgeTitle}>재방문 인원</span>
+      <span className={styles.badgeValue}>{value}명</span>
+    </div>
+  )
+}
+
+export { RealTimeBadge, AvgStaytimeBadge, RevisitBadge }

@@ -1,15 +1,32 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ArrowDoubleDownIcon, ArrowDoubleUpIcon } from '@/shared/ui/icons'
 import VisitorLineChart from '@/shared/ui/visitorLineChart.tsx'
-import Badge from './badge'
+import { AvgStaytimeBadge, RealTimeBadge, RevisitBadge } from './badge'
 import styles from './details.module.scss'
 
 interface StatisticsFloorProps {
   isOpen: boolean
+  floorNumber: string
+  floorName: string
+  description: string
+  src: string
+  realTimeVisitors: number
+  avgStayTime: number
+  returnVisitors: number
 }
 
-const StatisticsFloor = ({ isOpen }: StatisticsFloorProps) => {
+const StatisticsFloor = ({
+  isOpen,
+  floorNumber,
+  floorName,
+  description,
+  src,
+  realTimeVisitors,
+  avgStayTime,
+  returnVisitors,
+}: StatisticsFloorProps) => {
   const [isOpenContent, setIsOpenContent] = useState(isOpen)
 
   const handleClick = () => {
@@ -21,30 +38,34 @@ const StatisticsFloor = ({ isOpen }: StatisticsFloorProps) => {
   }, [isOpen])
 
   return (
-    <div className={styles.detailsContainer}>
-      {/** 타이틀 */}
+    <div className={`${styles.floorContainer} ${isOpenContent ? styles.open : ''}`} onClick={handleClick}>
       <div className={styles.titleBox}>
         <div className={styles.title}>
-          <p>지하 1층</p>
-          <span>창의의 공간</span>
+          <p>{floorName}</p>
+          <span>{description}</span>
         </div>
 
         <div className={styles.badgeBox}>
-          <Badge type='realtime'>123명</Badge>
-          <Badge type='avg'>63분</Badge>
-          <Badge type='revisit'>22명</Badge>
+          <RealTimeBadge value={realTimeVisitors} />
+          <AvgStaytimeBadge value={avgStayTime} />
+          <RevisitBadge value={returnVisitors} />
         </div>
 
         <button className={styles.collapseButton} onClick={handleClick}>
-          {isOpenContent ? '닫기' : '열기'}
+          {isOpenContent ? <ArrowDoubleUpIcon /> : <ArrowDoubleDownIcon />}
         </button>
       </div>
 
-      {/** 내용 */}
       {isOpenContent && (
         <div className={styles.floorInfo}>
-          <img src='/default.png' width={500} height={300} alt='지하 1층' />
-          <VisitorLineChart />
+          <img className={styles.floorImage} src={src} alt={`${floorName} 이미지`} />
+          <div className={styles.lineChartContainer}>
+            <div className={styles.floorNumber}>
+              <span>{floorNumber}</span>
+              <img src='/icon/arrow-single-right.svg' alt='arrow-right' width={14} height={14} />
+            </div>
+            <VisitorLineChart />
+          </div>
         </div>
       )}
     </div>

@@ -1,12 +1,22 @@
+'use client'
+
 import Card from '@/shared/ui/card'
-import Empty from '@/shared/ui/empty'
+import cardStyles from '@/shared/ui/card/card.module.scss'
 import styles from './summary.module.scss'
 
 const Calendar = () => {
+  const handleClick = () => {
+    alert('준비중 입니다.')
+  }
+
   return (
     <Card className={styles.calendarContainer}>
-      <strong>이벤트 캘린더</strong>
-      <Empty />
+      <div className={styles.titleContainer} onClick={handleClick}>
+        <span className={cardStyles.title}>이벤트 캘린더</span>
+        <button>
+          <img src='/icon/arrow-double-up.svg' alt='arrow icon' width={20} height={20} />
+        </button>
+      </div>
     </Card>
   )
 }

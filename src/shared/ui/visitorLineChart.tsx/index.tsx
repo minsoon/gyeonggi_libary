@@ -30,7 +30,6 @@ const VisitorLineChart = () => {
           iconType='line'
           iconSize={25}
           wrapperStyle={{
-            paddingBottom: '24px',
             display: 'flex',
             alignItems: 'center',
             fontSize: '14px',
@@ -40,6 +39,7 @@ const VisitorLineChart = () => {
             width: '100%',
             justifyContent: 'flex-end',
             right: -8,
+            top: -50,
           }}
           formatter={(value, entry) => {
             const unit = entry.dataKey === 'visitors' ? '명' : '%'
@@ -57,9 +57,8 @@ const VisitorLineChart = () => {
           dataKey='hour'
           tickLine={false}
           height={35}
-          tickMargin={16}
+          tickMargin={13}
           tick={{ fontSize: 14, fill: '#28395D', fontWeight: 800 }}
-          tickFormatter={value => value}
           axisLine={{
             stroke: '#9EAED0',
             strokeWidth: 1,
