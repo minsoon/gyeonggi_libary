@@ -1,21 +1,37 @@
-export const dynamic = 'force-dynamic' // 캐시 방지
+// src/app/api/[...path]/route.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
-async function proxy(req: Request, { params }: { params: { path?: string[] } }) {
-  const BACKEND = 'http://toysmyth-api.toysmythiot.com:8085/' // ← 여기에 네 API 서버 주소
-  const tail = params.path?.join('/') ?? ''
-  const url = new URL(req.url)
+const BACKEND = 'http://toysmyth-api.toysmythiot.com:8085'
+
+async function proxy(request: Request, ctx: any): Promise<Response> {
+  // path 처리 (string|string[]|undefined 안전하게)
+  const segs = ctx?.params?.path
+  const parts = Array.isArray(segs) ? segs : typeof segs === 'string' ? [segs] : []
+  const tail = parts.join('/')
+
+  const url = new URL(request.url)
   const target = `${BACKEND}/${tail}${url.search}`
 
   const resp = await fetch(target, {
-    method: req.method,
-    body: req.method === 'GET' || req.method === 'HEAD' ? undefined : await req.arrayBuffer(), // POST/PUT만 body 전달
+    method: request.method,
+    body: request.method === 'GET' || request.method === 'HEAD' ? undefined : await request.arrayBuffer(),
+    redirect: 'manual',
   })
 
-  // 원본 응답 그대로 전달
   return new Response(resp.body, {
     status: resp.status,
-    headers: resp.headers, // Content-Type 등 유지
+    headers: resp.headers,
   })
 }
 
-export { proxy as GET, proxy as POST, proxy as PUT, proxy as PATCH, proxy as DELETE }
+export const GET = proxy
+export const POST = proxy
+export const PUT = proxy
+export const PATCH = proxy
+export const DELETE = proxy
+
+export async function OPTIONS() {
+  return new Response(null, { status: 204 })
+}
