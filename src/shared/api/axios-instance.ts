@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
 
 let globalErrorHandlerCallback: ((errorMessage: string, type: '401' | '500' | 'other') => void) | null = null
 
@@ -9,8 +9,7 @@ export const setGlobalErrorHandler = (callback: (errorMessage: string, type: '40
 }
 
 export const apiInstance = axios.create({
-  // baseURL: API_URL,
-  baseURL: '/api',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
