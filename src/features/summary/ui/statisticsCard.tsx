@@ -11,6 +11,8 @@ interface StatisticsCardProps {
 const StatisticsCard = ({ title, titleValue, compareValue, type }: StatisticsCardProps) => {
   const suffix = type === 'avgStayTime' ? '분' : '명'
   const isIncrease = compareValue > 0
+  const isBeforeYesterday = ['returnVisitors', 'avgStayTime'].includes(type) // 전전일 기준
+  const compareTargetText = isBeforeYesterday ? '전전일' : '전일'
 
   return (
     <Card className={`${styles.statContainer} ${styles[type]}`}>
@@ -20,7 +22,10 @@ const StatisticsCard = ({ title, titleValue, compareValue, type }: StatisticsCar
             {titleValue}
             {suffix}
           </strong>
-          <div className={styles.statHeader}>{title}</div>
+          <div className={styles.statHeader}>
+            {title}
+            {isBeforeYesterday && <span className={styles.badge}>전일 대비</span>}
+          </div>
         </div>
         <div className={styles.statChangeContainer}>
           <div
@@ -30,14 +35,13 @@ const StatisticsCard = ({ title, titleValue, compareValue, type }: StatisticsCar
               {compareValue !== 0 && (
                 <img src={`/icon/arrow-${isIncrease ? 'increase' : 'decrease'}.svg`} alt='increase' />
               )}
-              <span>
-                <strong>
-                  {Math.abs(compareValue)}
-                  {suffix}
-                </strong>
-              </span>
+
+              <strong>
+                {Math.abs(compareValue)}
+                {suffix}
+              </strong>
             </div>
-            <span className={styles.changeLabel}>전일 대비</span>
+            <span className={styles.changeLabel}>{compareTargetText} 대비</span>
           </div>
         </div>
       </div>

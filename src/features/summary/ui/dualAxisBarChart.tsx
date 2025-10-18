@@ -55,7 +55,7 @@ const DualAxisBarChart = () => {
             tickMargin={16}
             tick={{ fontSize: 14, fill: COLORS.text, fontWeight: 800 }}
             axisLine={{
-              stroke: '#9EAED0',
+              stroke: COLORS.axis,
               strokeWidth: 1,
             }}
           />

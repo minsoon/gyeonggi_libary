@@ -70,6 +70,17 @@
     font-weight: $font-weight-bold;
     margin-top: 8px;
     color: $text-light-gray;
+
+    .badge {
+      border: 1px solid #9eaed0;
+      border-radius: 4px;
+      padding: 2px 4px;
+      font-size: 14px;
+      font-weight: $font-weight-semibold;
+      color: #9eaed0;
+      margin-left: 8px;
+      line-height: normal;
+    }
   }
 
   .statChangeContainer {
@@ -79,7 +90,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 4px;
-    font-family: 'NanumSquare';
 
     .changeContent {
       display: flex;
@@ -98,7 +108,7 @@
 
       .changeLabel {
         font-family: 'Roboto';
-        font-weight: 500;
+        font-weight: $font-weight-medium;
       }
 
       &.default {
@@ -323,7 +333,6 @@
 
       td {
         color: $text-navy;
-        font-family: 'Nanum Square';
         height: 38.5px;
 
         .floorItem {
@@ -347,7 +356,6 @@
             display: flex;
             color: $text-navy;
             font-size: 14px;
-            font-family: 'Nanum Square';
             font-weight: $font-weight-extrabold;
             line-height: 100%;
           }
