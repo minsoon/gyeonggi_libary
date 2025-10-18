@@ -9,7 +9,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/toysmth/:path*',
+        source: '/api/:path*',
         destination: 'http://toysmth-api.toysmthiot.com:8085/:path*',
       },
     ]
