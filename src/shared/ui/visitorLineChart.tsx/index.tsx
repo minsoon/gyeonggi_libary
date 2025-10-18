@@ -7,15 +7,13 @@ import { formatHourFromKST } from '@/shared/utils/date'
 const VisitorLineChart = () => {
   const { realtimeData } = useSummaryStore()
 
-  // realtimeData?.currentGraph.data를 사용하여 차트 데이터 생성
-  console.log('원본 데이터:', realtimeData?.currentGraph.data)
   const data = realtimeData?.currentGraph.data
     ?.map(item => {
       return {
         hour: formatHourFromKST(item.time),
         visitors: item.data,
         occupancy: item.congestion,
-        originalTime: item.time, // 정렬을 위한 원본 시간
+        originalTime: item.time,
       }
     })
     ?.sort((a, b) => new Date(a.originalTime).getTime() - new Date(b.originalTime).getTime())
