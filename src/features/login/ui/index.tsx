@@ -1,29 +1,33 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { setCookie } from '@/shared/utils/cookies'
 import styles from './login.module.scss'
 
 const Login = () => {
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
-    // TODO: 실제 로그인 로직 구현
-    console.log('Password:', password)
+    try {
+      // TODO: 로그인 API 호출
+      setCookie('auth_token', 'authenticated_user_token', 1)
 
-    // 임시 로딩 시뮬레이션
-    setTimeout(() => {
+      router.push('/summary')
+    } catch (error) {
+      console.error('로그인 실패:', error)
+    } finally {
       setIsLoading(false)
-      // 로그인 성공 시 리다이렉트
-      window.location.href = '/summary'
-    }, 1000)
+    }
   }
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={`${styles.loginContainer}`}>
       <div className={styles.card}>
         <h1 className={styles.title}>방문자 현황 분석 대시보드</h1>
 

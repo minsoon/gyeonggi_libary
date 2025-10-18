@@ -1,26 +1,28 @@
 'use client'
 
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { useSummaryStore } from '@/features/summary/model/summaryStore'
+import { formatHourFromKST } from '@/shared/utils/date'
 
 const VisitorLineChart = () => {
-  const data = [
-    {
-      hour: '10시',
-      visitors: 320,
-      occupancy: 50,
-    },
-    { hour: '11시', visitors: 300, occupancy: 50 },
-    { hour: '12시', visitors: 350, occupancy: 30 },
-    { hour: '13시', visitors: 270, occupancy: 20 },
-    { hour: '14시', visitors: 210, occupancy: 30 },
-    { hour: '15시', visitors: 300, occupancy: 40 },
-    { hour: '16시', visitors: 280, occupancy: 20 },
-    { hour: '17시', visitors: 270, occupancy: 100 },
-    { hour: '18시', visitors: 260, occupancy: 25 },
-  ]
+  const { realtimeData } = useSummaryStore()
+
+  // realtimeData?.currentGraph.data를 사용하여 차트 데이터 생성
+  console.log('원본 데이터:', realtimeData?.currentGraph.data)
+  const data = realtimeData?.currentGraph.data
+    ?.map(item => {
+      return {
+        hour: formatHourFromKST(item.time),
+        visitors: item.data,
+        occupancy: item.congestion,
+        originalTime: item.time, // 정렬을 위한 원본 시간
+      }
+    })
+    ?.sort((a, b) => new Date(a.originalTime).getTime() - new Date(b.originalTime).getTime())
+
   return (
     <ResponsiveContainer width='100%' height={300}>
-      <LineChart data={data} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+      <LineChart data={data} margin={{ top: 0, right: 0, bottom: 0, left: 0 }} style={{ pointerEvents: 'none' }}>
         <CartesianGrid yAxisId='left' stroke='#D6DCE4' vertical={false} />
         <Legend
           align='right'
@@ -82,6 +84,7 @@ const VisitorLineChart = () => {
           axisLine={false}
           tickLine={false}
           tick={{ fontSize: 14, fill: '#00AE6B', fontWeight: 800, textAnchor: 'end' }}
+          domain={[0, 100]}
         />
         <Line
           yAxisId='left'
@@ -98,15 +101,7 @@ const VisitorLineChart = () => {
               filter: 'drop-shadow(0 0 5px rgba(6, 91, 172, 0.5))',
             },
           }}
-          activeDot={{
-            r: 6,
-            fill: 'white',
-            stroke: '#065BAC',
-            strokeWidth: 4,
-            style: {
-              filter: 'drop-shadow(0 0 5px rgba(6, 91, 172, 0.5))',
-            },
-          }}
+          activeDot={false}
         />
         <Line
           yAxisId='right'

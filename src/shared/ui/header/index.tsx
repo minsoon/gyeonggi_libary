@@ -1,7 +1,18 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { deleteCookie } from '@/shared/utils/cookies'
 import { BellIcon, DetailsIcon, LogoutIcon, SettingIcon, StatisticsIcon, SummaryIcon } from '../icons'
 
 const Header = () => {
+  const router = useRouter()
+
+  const handleLogout = () => {
+    deleteCookie('auth_token')
+    router.push('/login')
+  }
+
   return (
     <header>
       <Link href='/summary' className='logo-section'>
@@ -32,7 +43,7 @@ const Header = () => {
           <Link href='/login' className='nav-link'>
             <BellIcon />
           </Link>
-          <Link href='/login' className='nav-link'>
+          <Link href='/login' onClick={handleLogout} className='nav-link'>
             <LogoutIcon />
           </Link>
         </div>
